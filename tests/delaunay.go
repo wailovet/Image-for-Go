@@ -11,7 +11,7 @@ import (
 	"os"
 )
 
-func Test(point list.List, img image.Image) {
+func Delaunay(point list.List, img image.Image) {
 
 	new_img := image.NewRGBA(img.Bounds())
 	w := img.Bounds().Dx()
@@ -23,7 +23,7 @@ func Test(point list.List, img image.Image) {
 		m_color[*(e.Value.(*Image.Triangle))] = color.RGBA{uint8(rand.Int() % 255), uint8(rand.Int() % 255), uint8(rand.Int() % 255), 255}
 	}
 
-	Render(w, l, new_img, m_color)
+	render(w, l, new_img, m_color)
 	new_file, err := os.Create("new_test.jpg")
 	if err != nil {
 		panic(err)
@@ -32,7 +32,7 @@ func Test(point list.List, img image.Image) {
 	fmt.Print("OK\n")
 }
 
-func Render(x int, y int, new_img *image.RGBA, m_color map[Image.Triangle]color.RGBA) {
+func render(x int, y int, new_img *image.RGBA, m_color map[Image.Triangle]color.RGBA) {
 
 	isRender := make(map[image.Point]bool)
 	for i := 0; i < x; i++ {
